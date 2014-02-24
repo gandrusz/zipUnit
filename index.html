@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Zipunit by gandrusz</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Zipunit</h1>
+        <p>Library for unit tests involving zip files and/or folder structure comparisons</p>
+
+        <p class="view"><a href="https://github.com/gandrusz/zipUnit">View the Project on GitHub <small>gandrusz/zipUnit</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/gandrusz/zipUnit/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/gandrusz/zipUnit/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/gandrusz/zipUnit">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <p>ZipUnit is a little library for comparing zip files as part of integration tests. Usage:</p>
+
+<p><code>AssertThat.ZipFile("actual.zip").MatchesZipFile("expected.zip");</code></p>
+
+<p>It is possible to ignore additional or missing files:</p>
+
+<p><code>AssertThat.ZipFile("actual.zip").IgnoringAdditional(pattern1).IgnoringMissing(pattern2).MatchesZipFile("expected.zip");</code></p>
+
+<p>where patterns look like the following:</p>
+
+<p><code>"Dir/file.ext" //starts from the root of the zip file</code></p>
+
+<p><code>"//Dir/file.ext" //starts from anywhere, like in an xPath</code></p>
+
+<p><code>"Dir/*/file.ext" //Asterix (*) matches any substring (excluding the slash '/')</code></p>
+
+<p><code>"Dir/file?.ext" //Question mark (?) matches one character (excluding the slash '/')</code></p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/gandrusz">gandrusz</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
