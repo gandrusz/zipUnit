@@ -33,7 +33,7 @@ namespace ZipUnit.Zip
 
         internal Stream Read(string fullName)
         {
-            return zipFile.SelectEntries(fullName).Single().OpenReader();
+            return zipFile[fullName].OpenReader();
         }
     }
 }

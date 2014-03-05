@@ -20,7 +20,8 @@ namespace ZipUnit
 
         private IEnumerable<string> FilesForDirectory(IDirectory rootDirectory, string pathSoFar)
         {
-            return rootDirectory.SubDirectories.SelectMany(d => FilesForDirectory(d, pathSoFar + "/" + d.Name)).Union(rootDirectory.Files.Select(f => pathSoFar + "/" + f.Name));
+            Func<string, string, string> newName = (string path, string name) => path == "" ? name : path + "/" + name;
+            return rootDirectory.SubDirectories.SelectMany(d => FilesForDirectory(d, newName(pathSoFar, d.Name))).Union(rootDirectory.Files.Select(f => newName(pathSoFar, f.Name)));
         }
 
         public IList<string> FilesSorted 
