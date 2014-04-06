@@ -18,7 +18,10 @@ namespace ZipUnit
         private readonly IComparer binaryComparer = new BinaryComparer();
         private static readonly IDictionary<string, IComparer> comparerForExtension = DefaultComparers(); //Static because of the specific way unit tests are usually written
 
-        
+        public static void RegisterComparer(string extension, IComparer comparer)
+        {
+            comparerForExtension[extension] = comparer;
+        }
 
         private AssertThat(IDirectory actual)
         {
