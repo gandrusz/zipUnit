@@ -5,9 +5,9 @@ using System.Text;
 
 namespace ZipUnit.Lists
 {
-    public class Lists
+    public class SortedListComparer : IListComparer
     {
-        public static ListDiff<string> Diff(IEnumerable<string> expected, IEnumerable<string> actual)
+        public ListDiff<string> Diff(IEnumerable<string> expected, IEnumerable<string> actual)
         {
             List<string> additional = new List<string>();
             List<string> missing = new List<string>();
@@ -54,6 +54,11 @@ namespace ZipUnit.Lists
                 while (actualIter.MoveNext());
             }
             return new ListDiff<string> { Additional = additional, Matching = matching, Missing = missing};
+        }
+
+        public ListDiff<string> Diff(IList<string> expected, IList<string> actual)
+        {
+            return Diff((IEnumerable<string>)expected, actual);
         }
     }
 }

@@ -6,17 +6,19 @@ using System.Text;
 using System.Threading.Tasks;
 using ZipUnit.Lists;
 
-namespace ZipUnitTests
+namespace ZipUnitTests.Lists
 {
     [TestFixture]
-    public class ListsTests
+    class SortedListComparerTests
     {
+        private SortedListComparer comparer = new SortedListComparer();
+
         [Test]
         public void DiffWhenEqual()
         {
             var expected = new[] { "A", "B", "C", "D", "E" };
             var actual = new[] { "A", "B", "C", "D", "E" };
-            var diff = Lists.Diff(expected, actual);
+            var diff = comparer.Diff(expected, actual);
 
             CollectionAssert.IsEmpty(diff.Missing);
             CollectionAssert.IsEmpty(diff.Additional);
@@ -28,7 +30,7 @@ namespace ZipUnitTests
         {
             var expected = new[] { "A", "B", "C", "D", "E" };
             var actual = new[] { "A1", "B", "C", "D" };
-            var diff = Lists.Diff(expected, actual);
+            var diff = comparer.Diff(expected, actual);
 
             CollectionAssert.AreEqual(new[] { "A", "E" }, diff.Missing);
             CollectionAssert.AreEqual(new[] { "A1" }, diff.Additional);
@@ -38,9 +40,9 @@ namespace ZipUnitTests
         [Test]
         public void DiffWhenActualLonger()
         {
-            var expected = new[] { "A", "B", "C", "D"};
+            var expected = new[] { "A", "B", "C", "D" };
             var actual = new[] { "A", "C", "D", "E" };
-            var diff = Lists.Diff(expected, actual);
+            var diff = comparer.Diff(expected, actual);
 
             CollectionAssert.AreEqual(new[] { "B" }, diff.Missing);
             CollectionAssert.AreEqual(new[] { "E" }, diff.Additional);

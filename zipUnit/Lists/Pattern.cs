@@ -83,5 +83,14 @@ namespace ZipUnit.Lists
             if (!wasStar && i < name.Length) return false;
             return true;
         }
+
+        public static string Extension(string fullName)
+        {
+            int lastDot = fullName.LastIndexOf('.');
+            int lastSlash = fullName.LastIndexOf('/');
+            if (lastDot <= 0 || lastDot <= lastSlash+1) return "";  //handle when filename starts with a dot
+            return fullName.Substring(lastDot + 1);
+        }
+
     }
 }
