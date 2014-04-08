@@ -16,21 +16,24 @@ namespace ZipUnit
         private readonly List<string> ignoreAdditional = new List<string>();
 
         private readonly IComparer binaryComparer = new BinaryComparer();
-        private static readonly IDictionary<string, IComparer> comparerForExtension = DefaultComparers(); //Static because of the specific way unit tests are usually written
+        private static readonly IDictionary<string, IComparer> defaultComparers = DefaultComparers(); //Static because of the specific way unit tests are usually written
+        private readonly IDictionary<string, IComparer> comparers;
+
 
         public static void RegisterComparer(string extension, IComparer comparer)
         {
-            comparerForExtension[extension] = comparer;
+            defaultComparers[extension] = comparer;
         }
 
-        private AssertThat(IDirectory actual)
+        private AssertThat(IDirectory actual, IDictionary<string, IComparer> comparers)
         {
             this.actual = new Root(actual);
+            this.comparers = new Dictionary<string, IComparer>(comparers);
         }
 
         public static AssertThat ZipFile(string name)
         {
-            return new AssertThat(new ZipRootDirectory(name));
+            return new AssertThat(new ZipRootDirectory(name), defaultComparers);
         }
 
         public AssertThat IgnoringAdditional(string pattern = "*.*")
@@ -42,6 +45,12 @@ namespace ZipUnit
         public AssertThat IgnoringMissing(string pattern = "*.*")
         {
             ignoreMissing.Add(pattern);
+            return this;
+        }
+
+        public AssertThat WithComparer(string extension, IComparer comparer)
+        {
+            comparers[extension] = comparer;
             return this;
         }
 
@@ -72,7 +81,7 @@ namespace ZipUnit
         private IComparer GetComparer(string fullName)
         {
             string extension = Pattern.Extension(fullName);
-            if (comparerForExtension.ContainsKey(extension)) return comparerForExtension[extension];
+            if (defaultComparers.ContainsKey(extension)) return defaultComparers[extension];
             return binaryComparer;
         }
 

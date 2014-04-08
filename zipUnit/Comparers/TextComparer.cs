@@ -41,15 +41,15 @@ namespace ZipUnit.Comparers
                 switch(difference.DifferenceType)
                 {
                     case IndexDifferenceType.Missing:
-                        sb.AppendFormat("Line " + difference.ExpectedIndex + " was missing: " + expected[difference.ExpectedIndex]);
+                        sb.AppendLine("Line " + difference.ExpectedIndex + " was missing: " + expected[difference.ExpectedIndex]);
                         break;
                     case IndexDifferenceType.Additional:
-                        sb.AppendFormat("Line " + difference.ActualIndex + " was not expected: " + actual[difference.ActualIndex]);
+                        sb.Append("Line " + difference.ActualIndex + " was not expected: " + actual[difference.ActualIndex]);
                         break;
                     case IndexDifferenceType.Different:
-                        sb.AppendFormat("Line " + difference.ExpectedIndex + " was different from the line " + difference.ActualIndex + " in actual:");
-                        sb.AppendFormat("  Expected: " + expected[difference.ExpectedIndex]);
-                        sb.AppendFormat("  Actual:   " + actual[difference.ActualIndex]);
+                        sb.AppendLine("Line " + difference.ExpectedIndex + " was different from the line " + difference.ActualIndex + " in actual:");
+                        sb.AppendLine("  Expected: " + expected[difference.ExpectedIndex]);
+                        sb.AppendLine("  Actual:   " + actual[difference.ActualIndex]);
                         break;
                     default:
                         throw new NotSupportedException("IndexDifferenceType " + difference.DifferenceType + " is not expected.");

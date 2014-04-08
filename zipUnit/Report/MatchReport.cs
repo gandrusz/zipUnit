@@ -64,7 +64,7 @@ namespace ZipUnit.Report
                 sb.AppendLine("There were " + FileDifferences.Count + " differences:");
                 foreach (var diff in FileDifferences)
                 {
-                    var lines = Regex.Split(diff.Message, "\r\n|\r|\n");
+                    var lines = Regex.Split(diff.Message, "\r\n|\r|\n").Where(s=> !String.IsNullOrWhiteSpace(s));
                     sb.AppendLine(INDENT + diff.GetType().Name+": " + diff.FullName);
                     foreach(var line in lines)
                     {
