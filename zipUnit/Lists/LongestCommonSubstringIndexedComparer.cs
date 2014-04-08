@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ZipUnit.Lists
 {
-    public class LongestCommonSubstringListComparer<T> : IIndexedComparer<T>
+    public class LongestCommonSubstringIndexedComparer<T> : IIndexedComparer<T>
     {
         public IEnumerable<IndexDifference> IndexDiff(IList<T> expected, IList<T> actual)
         {

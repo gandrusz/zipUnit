@@ -51,11 +51,13 @@
     <Compile Include="IComparer.cs" />
     <Compile Include="IDirectory.cs" />
     <Compile Include="IFile.cs" />
+    <Compile Include="Lists\CompositeIndexedComparer.cs" />
     <Compile Include="Lists\IIndexedComparer.cs" />
     <Compile Include="Lists\IListComparer.cs" />
     <Compile Include="Lists\IndexDifference.cs" />
     <Compile Include="Lists\ListDiff.cs" />
-    <Compile Include="Lists\LongestCommonSubstringListComparer.cs" />
+    <Compile Include="Lists\LongestCommonSubstringIndexedComparer.cs" />
+    <Compile Include="Lists\NaiveIndexedComparer.cs" />
     <Compile Include="Lists\Pattern.cs" />
     <Compile Include="Lists\SortedListComparer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -88,7 +88,7 @@ namespace ZipUnit
         
         private static IDictionary<string, IComparer> DefaultComparers()
         {
-            var textComparer = new TextComparer(new LongestCommonSubstringListComparer<string>());
+            var textComparer = new TextComparer(new CompositeIndexedComparer<string>());
 
             return new Dictionary<string, IComparer>(StringComparer.InvariantCultureIgnoreCase) {
                 {"txt", textComparer},

@@ -9,9 +9,9 @@ using ZipUnit.Lists;
 namespace ZipUnitTests.Lists
 {
     [TestFixture]
-    public class LongestCommonSubstringListComparerTests
+    public class LongestCommonSubstringIndexedComparerTests
     {
-        private LongestCommonSubstringListComparer<string> comparer = new LongestCommonSubstringListComparer<string>();
+        private LongestCommonSubstringIndexedComparer<string> comparer = new LongestCommonSubstringIndexedComparer<string>();
 
         [Test]
         public void DiffWhenEqual()
