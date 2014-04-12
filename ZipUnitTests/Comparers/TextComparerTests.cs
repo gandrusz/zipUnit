@@ -60,7 +60,7 @@ namespace ZipUnitTests.Comparers
             StringAssert.Contains("2", result.Message);
             StringAssert.Contains("B", result.Message);
             StringAssert.Contains("C", result.Message);
-            AssertHasNumberOfLines(3, result.Message);
+            AssertUtil.HasNumberOfLines(3, result.Message);
         }
 
         [Test]
@@ -91,10 +91,6 @@ namespace ZipUnitTests.Comparers
         }
 
 
-        public void AssertHasNumberOfLines(int n, string actual)
-        {
-            var lines = Regex.Split(actual, "\r\n|\r|\n").Count(s=> !String.IsNullOrWhiteSpace(s));
-            Assert.AreEqual(n, lines, "Expected " + n + " lines, but was " + lines + ". Actual string: " + actual);
-        }
+        
     }
 }

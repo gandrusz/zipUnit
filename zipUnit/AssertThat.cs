@@ -88,7 +88,10 @@ namespace ZipUnit
         
         private static IDictionary<string, IComparer> DefaultComparers()
         {
-            var textComparer = new TextComparer(new CompositeIndexedComparer<string>());
+            var indexedComparer = new CompositeIndexedComparer<string>();
+            var textComparer = new TextComparer(indexedComparer);
+            var xmlComparer = new XmlComparer(indexedComparer);
+
 
             return new Dictionary<string, IComparer>(StringComparer.InvariantCultureIgnoreCase) {
                 {"txt", textComparer},
@@ -99,7 +102,10 @@ namespace ZipUnit
                 {"java", textComparer},
                 {"h", textComparer},
                 {"tex", textComparer},
-                {"xml", textComparer} //temporarily
+                {"xml", xmlComparer},
+                {"xhtml", xmlComparer},
+                {"xht", xmlComparer},
+                {"csproj", xmlComparer}
             };
         } 
     }

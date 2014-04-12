@@ -47,7 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssertThatTests.cs" />
+    <Compile Include="Comparers\AssertUtil.cs" />
     <Compile Include="Comparers\TextComparerTests.cs" />
+    <Compile Include="Comparers\XmlComparerTests.cs" />
     <Compile Include="Lists\CompositeIndexedComparerTests.cs" />
     <Compile Include="Lists\LongestCommonSubstringIndexedComparerTests.cs" />
     <Compile Include="Lists\NaiveIndexedComparerTests.cs" />

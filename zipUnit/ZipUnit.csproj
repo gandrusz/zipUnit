@@ -48,6 +48,9 @@
     <Compile Include="Comparers\BinaryFileDifference.cs" />
     <Compile Include="Comparers\TextComparer.cs" />
     <Compile Include="Comparers\TextFileDifference.cs" />
+    <Compile Include="Comparers\XmlComparer.cs" />
+    <Compile Include="Comparers\XmlDifference.cs" />
+    <Compile Include="Comparers\XmlFileDifference.cs" />
     <Compile Include="IComparer.cs" />
     <Compile Include="IDirectory.cs" />
     <Compile Include="IFile.cs" />
