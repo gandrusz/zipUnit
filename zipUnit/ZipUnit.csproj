@@ -43,9 +43,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssertFile.cs" />
     <Compile Include="AssertThat.cs" />
+    <Compile Include="AssertXml.cs" />
+    <Compile Include="AssertZip.cs" />
     <Compile Include="Comparers\BinaryComparer.cs" />
     <Compile Include="Comparers\BinaryFileDifference.cs" />
+    <Compile Include="Comparers\DefaultComparers.cs" />
     <Compile Include="Comparers\TextComparer.cs" />
     <Compile Include="Comparers\TextFileDifference.cs" />
     <Compile Include="Comparers\XmlComparer.cs" />
