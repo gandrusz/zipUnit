@@ -38,5 +38,10 @@ namespace ZipUnit.Comparers
         {
             get { return differences; }
         }
+
+        public override string ToString()
+        {
+            return GetType().Name + ": " + message;
+        }
     }
 }

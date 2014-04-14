@@ -22,18 +22,18 @@ namespace ZipUnit.Comparers
         public static IDictionary<string, IComparer> GetDefaultComparers()
         {
             return new Dictionary<string, IComparer>(StringComparer.InvariantCultureIgnoreCase) {
-                {"txt", TextComparer},
-                {"htm", TextComparer},
-                {"html", TextComparer},
-                {"cs", TextComparer},
-                {"cpp", TextComparer},
-                {"java", TextComparer},
-                {"h", TextComparer},
-                {"tex", TextComparer},
-                {"xml", XmlComparer},
-                {"xhtml", XmlComparer},
-                {"xht", XmlComparer},
-                {"csproj", XmlComparer}
+                {".txt", TextComparer},
+                {".htm", TextComparer},
+                {".html", TextComparer},
+                {".cs", TextComparer},
+                {".cpp", TextComparer},
+                {".java", TextComparer},
+                {".h", TextComparer},
+                {".tex", TextComparer},
+                {".xml", XmlComparer},
+                {".xhtml", XmlComparer},
+                {".xht", XmlComparer},
+                {".csproj", XmlComparer}
             };
         } 
     }

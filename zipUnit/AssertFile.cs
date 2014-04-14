@@ -7,25 +7,35 @@ using ZipUnit.Comparers;
 
 namespace ZipUnit
 {
-    public class AssertFile
+    public class AssertFile : IDisposable
     {
+        private bool needsDisposing = false;
         private readonly Stream actual;
         private readonly string name = "N/A";
         private IComparer comparer;
 
         public static void AreEqual(string expectedPath, string actualPath)
         {
-            new AssertFile(actualPath).Matches(expectedPath);
+            using (var assert = new AssertFile(actualPath))
+            {
+                assert.Matches(expectedPath);
+            }
         }
 
         public static void AreEqual(string expectedPath, string actualPath, IComparer comparer)
         {
-            new AssertFile(actualPath, comparer).Matches(expectedPath);
+            using (var assert = new AssertFile(actualPath, comparer))
+            {
+                assert.Matches(expectedPath);
+            }
         }
 
         public static void AreEqual(Stream expected, Stream actual, IComparer comparer)
         {
-            new AssertFile(actual, comparer).Matches(expected);
+            using (var assert = new AssertFile(actual, comparer))
+            {
+                assert.Matches(expected);
+            }
         }
 
         public AssertFile(string actualFileName)
@@ -33,7 +43,9 @@ namespace ZipUnit
         {}
 
         public AssertFile(string actualFileName, IComparer comparer) : this(File.Open(actualFileName, FileMode.Open), comparer)
-        {}
+        {
+            needsDisposing = true;
+        }
 
         public AssertFile(Stream actual, IComparer comparer)
         {
@@ -49,13 +61,16 @@ namespace ZipUnit
 
         public void Matches(String expectedPath)
         {
-            Matches(File.Open(expectedPath, FileMode.Open));
+            using (var stream = File.Open(expectedPath, FileMode.Open))
+            {
+                Matches(stream);
+            }
         }
 
         public void Matches(Stream expected)
         {
             var report = comparer.DifferenceOrNull(name, expected, actual);
-            if (report != null) throw new ZipUnitAssertException(report.Message);
+            if (report != null) throw new ZipUnitAssertException(report.ToString());
         }
 
         private static IComparer GetComparerForFilename(string fileName)
@@ -63,6 +78,11 @@ namespace ZipUnit
             string extension = Path.GetExtension(fileName);
             if (DefaultComparers.ForExtensions.ContainsKey(extension)) return DefaultComparers.ForExtensions[extension];
             return DefaultComparers.BinaryComparer;
+        }
+
+        public void Dispose()
+        {
+            if(needsDisposing) actual.Dispose();
         }
     }
 }

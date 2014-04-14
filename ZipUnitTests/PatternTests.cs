@@ -39,11 +39,11 @@ namespace ZipUnitTests
         }
 
 
-        [TestCase("Fred/a/b/c.txt", Result = "txt")]
-        [TestCase("c.txt", Result = "txt")]
+        [TestCase("Fred/a/b/c.txt", Result = ".txt")]
+        [TestCase("c.txt", Result = ".txt")]
         [TestCase(".txt", Result = "")]//Unix hidden file, no extension
         [TestCase("txt", Result = "")]
-        [TestCase("a.b/a.txt", Result = "txt")]
+        [TestCase("a.b/a.txt", Result = ".txt")]
         [TestCase("a.b/.txt", Result = "")]
         [TestCase("a.b/txt", Result = "")]
         public string ExtensionTests(string fileName)

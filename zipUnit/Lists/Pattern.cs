@@ -89,7 +89,7 @@ namespace ZipUnit.Lists
             int lastDot = fullName.LastIndexOf('.');
             int lastSlash = fullName.LastIndexOf('/');
             if (lastDot <= 0 || lastDot <= lastSlash+1) return "";  //handle when filename starts with a dot
-            return fullName.Substring(lastDot + 1);
+            return fullName.Substring(lastDot);
         }
 
     }
