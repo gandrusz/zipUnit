@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using ZipUnit.Comparers;
@@ -54,6 +55,13 @@ namespace ZipUnit
             if (report.Failed) throw new ZipUnitAssertException(report);
         }
 
+        public AssertFileInZip ContainsFile(string fileName)
+        {
+            if (!actual.ContainsFile(fileName)) throw new ZipUnitAssertException("Assertion failed: zip " + actual + " doesn't contain " + fileName);
+            IComparer comparer = GetComparer(fileName);
+            return new AssertFileInZip(this, actual.OpenFile(fileName), comparer);
+        }
+
         private MatchReport Match(Root expected)
         {
             var sortedComparer = new SortedListComparer();
@@ -76,6 +84,21 @@ namespace ZipUnit
             string extension = Pattern.Extension(fullName);
             if (comparers.ContainsKey(extension)) return comparers[extension];
             return DefaultComparers.BinaryComparer;
+        }
+
+        public class AssertFileInZip : AssertFile
+        {
+            private readonly AssertZip zip;
+
+            public AssertFileInZip(AssertZip zip, Stream actual, IComparer comparer) : base(actual, comparer)
+	        {
+                this.zip = zip;
+	        }
+
+            public AssertZip AndTheZip()
+            { 
+                return zip;
+            }
         }
     }
 }

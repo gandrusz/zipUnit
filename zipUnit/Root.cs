@@ -41,5 +41,16 @@ namespace ZipUnit
             return OpenFile(directory.SubDirectories.Single(d => d.Name == path[next]), path, next + 1);
         }
         //TODO: add directories
+
+        internal bool ContainsFile(string fullName)
+        {
+            return ContainsFile(rootDirectory, fullName.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries), 0);
+        }
+
+        private bool ContainsFile(IDirectory directory, string[] path, int next)
+        {
+            if (next + 1 == path.Length) return directory.Files.Any(f => f.Name == path[next]);
+            return ContainsFile(directory.SubDirectories.Single(d => d.Name == path[next]), path, next + 1);
+        }
     }
 }

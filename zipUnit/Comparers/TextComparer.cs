@@ -44,7 +44,7 @@ namespace ZipUnit.Comparers
                         sb.AppendLine("Line " + difference.ExpectedIndex + " was missing: " + expected[difference.ExpectedIndex]);
                         break;
                     case IndexDifferenceType.Additional:
-                        sb.Append("Line " + difference.ActualIndex + " was not expected: " + actual[difference.ActualIndex]);
+                        sb.AppendLine("Line " + difference.ActualIndex + " was not expected: " + actual[difference.ActualIndex]);
                         break;
                     case IndexDifferenceType.Different:
                         sb.AppendLine("Line " + difference.ExpectedIndex + " was different from the line " + difference.ActualIndex + " in actual:");

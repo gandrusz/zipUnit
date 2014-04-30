@@ -59,18 +59,19 @@ namespace ZipUnit
             return this;
         }
 
-        public void Matches(String expectedPath)
+        public AssertFile Matches(String expectedPath)
         {
             using (var stream = File.Open(expectedPath, FileMode.Open))
             {
-                Matches(stream);
+                return Matches(stream);
             }
         }
 
-        public void Matches(Stream expected)
+        public AssertFile Matches(Stream expected)
         {
             var report = comparer.DifferenceOrNull(name, expected, actual);
             if (report != null) throw new ZipUnitAssertException(report.ToString());
+            return this;
         }
 
         private static IComparer GetComparerForFilename(string fileName)

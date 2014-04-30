@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -90,6 +91,21 @@ namespace ZipUnitTests
             AssertThat.ZipFile("TestZip1.zip").IgnoringAdditional()
                                               .IgnoringMissing()
                                               .MatchesZipFile("TestZip3.zip");
+        }
+
+        [Test]
+        public void ContainsFileThrowsIfMissing()
+        { 
+            Assert.Throws<ZipUnitAssertException>(() => AssertThat.ZipFile("TestZip1.zip").ContainsFile("Not there"));
+        }
+
+        [Test]
+        public void ContainsFileReturnsCorrectFileObject()
+        {
+            string expectedContent = "Test file A";
+            AssertThat.ZipFile("TestZip1.zip")
+                      .ContainsFile("A.txt")
+                      .Matches(new MemoryStream(Encoding.UTF8.GetBytes(expectedContent)));
         }
     }
 }
